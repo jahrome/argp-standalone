@@ -1430,7 +1430,7 @@ argp_args_usage (const struct argp *argp, const struct argp_state *state,
   if (fdoc)
     {
       const char *cp = fdoc;
-      nl = __strchrnul (cp, '\n');
+      nl = strchr (cp, '\n');
       if (*nl != '\0')
 	/* This is a `multi-level' args doc; advance to the correct position
 	   as determined by our state in LEVELS, and update LEVELS.  */
@@ -1438,7 +1438,7 @@ argp_args_usage (const struct argp *argp, const struct argp_state *state,
 	  int i;
 	  multiple = 1;
 	  for (i = 0; i < *our_level; i++)
-	    cp = nl + 1, nl = __strchrnul (cp, '\n');
+	    cp = nl + 1, nl = strchr (cp, '\n');
 	  (*levels)++;
 	}
 

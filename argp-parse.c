@@ -189,8 +189,6 @@ argp_version_parser (int key, char *arg UNUSED, struct argp_state *state)
     case 'V':
       if (argp_program_version_hook)
 	(*argp_program_version_hook) (state->out_stream, state);
-      else if (argp_program_version)
-	fprintf (state->out_stream, "%s\n", argp_program_version);
       else
 	__argp_error (state, dgettext (state->root_argp->argp_domain,
 				       "(PROGRAM ERROR) No version known!?"));
@@ -1242,8 +1240,6 @@ __argp_parse (const struct argp *argp, int argc, char **argv, unsigned flags,
       if (argp)
 	(child++)->argp = argp;
       (child++)->argp = &argp_default_argp;
-      if (argp_program_version || argp_program_version_hook)
-	(child++)->argp = &argp_version_argp;
       child->argp = 0;
 
       argp = top_argp;
